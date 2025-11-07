@@ -1,0 +1,26 @@
+# mac 系统文件
+.DS_Store
+
+# Python 编译缓存
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 日志和临时文件
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+
+# 大量中间输出的文件夹（按你的实际名字改）
+outputs/
+results/
+checkpoints/
+runs/
+
+# 一些可能无用的备份文件
+*backup*
+*~ 
