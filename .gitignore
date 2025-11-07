@@ -19,7 +19,7 @@ temp/
 outputs/
 checkpoints/
 runs/
-training logs/
+training_logs/
 
 # 一些可能无用的备份文件
 *backup*
