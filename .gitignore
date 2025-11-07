@@ -20,6 +20,7 @@ outputs/
 checkpoints/
 runs/
 training_logs/
+simple_train_test/
 
 # 一些可能无用的备份文件
 *backup*
