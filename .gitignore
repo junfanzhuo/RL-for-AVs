@@ -16,9 +16,6 @@ temp/
 *.tmp
 
 # 大量中间输出的文件夹（按你的实际名字改）
-outputs/
-checkpoints/
-runs/
 training_logs/
 simple_train_test/
 
