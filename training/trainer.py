@@ -27,6 +27,15 @@ class ConditionalPolicyTrainer:
         if self.value_net is not None:
             self.value_net.to(device)
 
+    def load_normalization_params(self, param_path='simple_approach/results/normalization_params.pth'):
+        """加载归一化参数"""
+        params = torch.load(param_path, map_location=self.device)
+        self.state_mean = params['state_mean']
+        self.state_std = params['state_std']
+        self.action_mean = params['action_mean']
+        self.action_std = params['action_std']
+        print(f"✓ Loaded normalization params from {param_path}")
+
     def behavior_cloning(self, states, actions, behavior_ids,
                         epochs=50, batch_size=64, lr=3e-4,
                         weight_decay=1e-5, validation_split=0.1):
@@ -211,6 +220,16 @@ class ConditionalPolicyTrainer:
         print(f"✓ BEHAVIOR CLONING COMPLETE")
         print(f"  Best Val Loss: {best_val_loss:.4f}")
         print(f"  Model saved: simple_approach/results/best_policy_bc.pth")
+
+        # 保存归一化参数
+        normalization_params = {
+            'state_mean': self.state_mean,
+            'state_std': self.state_std,
+            'action_mean': self.action_mean,
+            'action_std': self.action_std
+        }
+        torch.save(normalization_params, 'simple_approach/results/normalization_params.pth')
+        print(f"  Normalization params saved: simple_approach/results/normalization_params.pth")
         print("="*70)
 
         # 加载最佳模型

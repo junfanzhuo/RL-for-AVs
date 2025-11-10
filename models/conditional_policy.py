@@ -12,6 +12,7 @@ Conditional Policy Network
 import torch
 import torch.nn as nn
 from torch.distributions import Normal
+import numpy as np
 
 
 class ConditionalPolicy(nn.Module):
@@ -81,12 +82,15 @@ class ConditionalPolicy(nn.Module):
             behavior_features: [batch, embedding_dim]
         """
         # Handle int/numpy inputs
-        if isinstance(behavior_id, int):
+        if isinstance(behavior_id, (int, np.integer)):
             behavior_id = torch.tensor([behavior_id])
         elif not isinstance(behavior_id, torch.Tensor):
             behavior_id = torch.tensor(behavior_id)
 
-        if behavior_id.dim() == 2:
+        # Ensure at least 1D
+        if behavior_id.dim() == 0:
+            behavior_id = behavior_id.unsqueeze(0)
+        elif behavior_id.dim() == 2:
             behavior_id = behavior_id.squeeze(-1)
 
         if self.use_learned_embedding:
