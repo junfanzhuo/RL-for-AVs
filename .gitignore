@@ -18,6 +18,11 @@ temp/
 # 大量中间输出的文件夹（按你的实际名字改）
 training_logs/
 simple_train_test/
+results/
+
+# 其他文件
+validate_optimized.py
+visualize_trajectories.py
 
 # 一些可能无用的备份文件
 *backup*
